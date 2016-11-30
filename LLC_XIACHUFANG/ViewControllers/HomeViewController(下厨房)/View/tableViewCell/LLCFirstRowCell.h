@@ -10,8 +10,8 @@
 
 @interface LLCFirstRowCell : UITableViewCell
 
-@property (nonatomic, strong) UIImageView *leftImageView;
-@property (nonatomic, strong) UIImageView *rightImageView;
+@property (nonatomic, strong) UIButton *leftBtn;
+@property (nonatomic, strong) UIButton *rightBtn;
 
 - (void)firstRowCellBindReceiveImageViewURl:(NSString *)url;
 

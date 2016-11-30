@@ -7,63 +7,71 @@
 //
 
 #import "LLCFirstRowCell.h"
-
-
-@interface LLCFirstRowCell ()
-
-
-
-@end
+#import "UIButton+WebCache.h"
 
 @implementation LLCFirstRowCell
 
-- (UIImageView *)leftImageView {
-    if(_leftImageView == nil) {
-        _leftImageView = [[UIImageView alloc] init];
-        [self.contentView addSubview:_leftImageView];
-        [_leftImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+- (UIButton *)leftBtn {
+    if(_leftBtn == nil) {
+        _leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self.contentView addSubview:_leftBtn];
+        [_leftBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.top.bottom.equalTo(@0);
             make.width.equalTo(@((ScreenWidth - 1) / 2));
         }];
         // label
-        [self initWithTitle:@"本周流行菜谱" withSuperView:self.leftImageView];
+        [self initWithTitle:@"本周流行菜谱" withSuperView:_leftBtn];
+        
+        // click
+        [_leftBtn addTarget:self action:@selector(leftBtnClick) forControlEvents:UIControlEventTouchUpInside];
     }
-    return _leftImageView;
+    return _leftBtn;
 }
 
-- (UIImageView *)rightImageView {
-    if(_rightImageView == nil) {
-        _rightImageView = [[UIImageView alloc] init];
-        [self.contentView addSubview:_rightImageView];
-        [_rightImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+- (UIButton *)rightBtn {
+    if(_rightBtn == nil) {
+        _rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self.contentView addSubview:_rightBtn];
+        [_rightBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.top.bottom.equalTo(@0);
             make.width.equalTo(@((ScreenWidth - 1) / 2));
         }];
         
         // icon
         UIImageView *iconImageView = [[UIImageView alloc] init];
-        [self.rightImageView addSubview:iconImageView];
+        [self.rightBtn addSubview:iconImageView];
         [iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.center.equalTo(self.rightImageView);
+            make.center.equalTo(_rightBtn);
             make.size.mas_equalTo(CGSizeMake(40, 40));
         }];
         iconImageView.image = [UIImage imageNamed:HomePageFirstCellRightIconImage];
         
         
         // label
-        [self initWithTitle:@"查看好友并关注" withSuperView:self.rightImageView];
+        [self initWithTitle:@"查看好友并关注" withSuperView:_rightBtn];
+        
+        // click
+        [_rightBtn addTarget:self action:@selector(rightBtnClick) forControlEvents:UIControlEventTouchUpInside];
     }
-    return _rightImageView;
+    return _rightBtn;
+}
+
+- (void)leftBtnClick{
+    NSLog(@"left");
+}
+
+- (void)rightBtnClick{
+    NSLog(@"right");
 }
 
 - (void)firstRowCellBindReceiveImageViewURl:(NSString *)url{
     NSURL *URL = [NSURL URLWithString:url];
-    [self.leftImageView sd_setImageWithURL:URL placeholderImage:kPlaceholderImage];
+    [self.leftBtn sd_setImageWithURL:URL forState:UIControlStateNormal placeholderImage:kPlaceholderImage];
     
-    self.rightImageView.image = [UIImage imageNamed:HomePageFirstCellRightImageView];
+    [self.rightBtn setBackgroundImage:[UIImage imageNamed:HomePageFirstCellRightImageView] forState:UIControlStateNormal];
 }
 
-- (void)initWithTitle:(NSString *)title withSuperView:(UIImageView *)superView{
+- (void)initWithTitle:(NSString *)title withSuperView:(UIButton *)superView{
     UILabel *label = [[UILabel alloc] init];
     label.font = [UIFont systemFontOfSize:15];
     label.textColor = [UIColor whiteColor];
@@ -74,6 +82,7 @@
         make.centerX.equalTo(superView);
     }];
 }
+
 
 - (void)awakeFromNib {
     // Initialization code

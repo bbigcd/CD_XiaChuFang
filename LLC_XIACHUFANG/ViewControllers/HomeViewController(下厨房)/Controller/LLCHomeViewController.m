@@ -56,9 +56,9 @@ UIScrollViewDelegate>
         [_tableView setDelegate:self];
         [_tableView setDataSource:self];
         _tableView.tableFooterView = [[UIView alloc] init];
-        [_tableView registerClass:[LLCFirstRowCell class] forCellReuseIdentifier:kFirstCellID];
+        [_tableView registerClass:[LLCFirstRowCell  class] forCellReuseIdentifier:kFirstCellID];
         [_tableView registerClass:[LLCSecondRowCell class] forCellReuseIdentifier:kSecondCellID];
-        [_tableView registerClass:[LLCThirdRowCell class] forCellReuseIdentifier:kThirdCellID];
+        [_tableView registerClass:[LLCThirdRowCell  class] forCellReuseIdentifier:kThirdCellID];
         [_tableView registerClass:[LLCTemplate1Cell class] forCellReuseIdentifier:kTemplate1CellID];
         [_tableView registerClass:[LLCTemplate2Cell class] forCellReuseIdentifier:kTemplate2CellID];
         [_tableView registerClass:[LLCTemplate4Cell class] forCellReuseIdentifier:kTemplate4CellID];
@@ -120,8 +120,7 @@ UIScrollViewDelegate>
 /**
  * 早餐：早上：6：00-12：00 午餐：12：00-6：00 晚餐：6：00-次日4：00
  */
-- (void)setContentOffset
-{
+- (void)setContentOffset{
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"a"];//获取当前时间是上午还是下午
     NSString *date = [formatter stringFromDate:[NSDate date]];
@@ -231,7 +230,7 @@ UIScrollViewDelegate>
                                                            withCellID:kFirstCellID
                                                       withReceiveItem:mainDataModel.content
                                                         withIndexPath:indexPath];
-//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }else{
         LLCMainCellDataContentIssuesModel *model = mainCellDataModel.content.issues[indexPath.section -1];
@@ -242,6 +241,7 @@ UIScrollViewDelegate>
                                                            withCellID:cellID
                                                       withReceiveItem:mainCellDataModel.content
                                                         withIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
     return nil;
