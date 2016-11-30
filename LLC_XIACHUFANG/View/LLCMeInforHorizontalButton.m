@@ -22,6 +22,7 @@
 // 在xib中的初始化
 - (void)awakeFromNib
 {
+    [super awakeFromNib];
     [self setup];
 }
 

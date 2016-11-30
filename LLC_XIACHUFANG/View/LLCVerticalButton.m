@@ -35,6 +35,7 @@
 
 // 在xib中
 - (void)awakeFromNib{
+    [super awakeFromNib];
     [self setup];
 }
 
