@@ -209,6 +209,13 @@ UIScrollViewDelegate>
     }
 }
 
+// 去除分割线左边的间距
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    cell.separatorInset = UIEdgeInsetsZero;
+    cell.layoutMargins = UIEdgeInsetsZero;
+    cell.preservesSuperviewLayoutMargins = NO;
+}
+
 #pragma mark --UITableViewDataSource--
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
